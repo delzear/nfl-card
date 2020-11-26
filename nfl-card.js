@@ -9,15 +9,15 @@ class NflCard extends HTMLElement {
       this.appendChild(card);
     }
     // https://static.nfl.com/liveupdate/scorestrip/ss.json
-    this.nfl_week = JSON.parse(json_string);
 
     this.content.innerHTML = `Yo! Patate!`;
+    renderGames();
   }
 
   renderGames() {
     $.getJSON('https://static.nfl.com/liveupdate/scorestrip/ss.json', function (data) {
       // JSON result in `data` variable
-      this.nfl_week = JSON.parse(json_string);
+      this.nfl_week = data;
 
       this.content.innerHTML = "There is " + this.nfl_week.gms + " games this week!"
     });
