@@ -15,12 +15,16 @@ class NflCard extends HTMLElement {
   }
 
   render() {
-    $.getJSON('https://static.nfl.com/liveupdate/scorestrip/ss.json', function (data) {
-      // JSON result in `data` variable
-      this.nfl_week = data;
+    fetch('/url/to/file.json')
+      .then(function (response) {
+        this.nfl_week = response.json();
 
-      this.content.innerHTML = "There is " + this.nfl_week.gms + " games this week!"
-    });
+        this.content.innerHTML = "There is " + this.nfl_week.gms.length + " games this week!"
+      }).catch(function (error) {
+        console.error("Could not load NFL Data!")
+      });
+      // JSON result in `data` variable
+    
 
   }
   setConfig(e) {
