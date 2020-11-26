@@ -12,7 +12,7 @@ class NflCard extends HTMLElement {
 
     this.content.innerHTML = `Yo! Patate!`;
 
-    renderGames();
+    this.renderGames();
   }
 
   renderGames() {
