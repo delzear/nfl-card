@@ -20,12 +20,19 @@ class NflCard extends HTMLElement {
         `;
     }
     
-    setConfig(config) {
-        if (!config.entity) {
-        throw new Error('You need to define an entity');
-        }
-        this.config = config;
+  async setConfig(config) {
+    if (!config || !config.cards || !Array.isArray(config.cards)) {
+      throw new Error('NFL Card config incorrect');
     }
+    this._config = config;
+    this._refCards = [];
+
+    if (window.loadCardHelpers) {
+      this.helpers = await window.loadCardHelpers();
+    }
+
+    this.renderCard();
+  }
     
     // The height of your card. Home Assistant uses this to automatically
     // distribute all cards over the available columns.
