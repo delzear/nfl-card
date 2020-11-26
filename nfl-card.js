@@ -15,7 +15,7 @@ class NflCard extends HTMLElement {
   }
 
   render() {
-    fetch('/url/to/file.json')
+    fetch('https://static.nfl.com/liveupdate/scorestrip/ss.json')
       .then(function (response) {
         this.nfl_week = response.json();
 
