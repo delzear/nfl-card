@@ -11,10 +11,10 @@ class NflCard extends HTMLElement {
     // https://static.nfl.com/liveupdate/scorestrip/ss.json
 
     this.content.innerHTML = `Yo! Patate!`;
-    this.renderGames();
+    this.render();
   }
 
-  renderGames() {
+  render() {
     $.getJSON('https://static.nfl.com/liveupdate/scorestrip/ss.json', function (data) {
       // JSON result in `data` variable
       this.nfl_week = data;
