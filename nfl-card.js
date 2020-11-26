@@ -18,8 +18,7 @@ class NflCard extends HTMLElement {
     fetch('https://static.nfl.com/liveupdate/scorestrip/ss.json')
       .then(function (response) {
         response.json().then(function (nfl_data) {
-          this.nfl_week = nfl_data
-          this.content.innerHTML = "There is " + this.nfl_week.gms.length + " games this week!"
+          this.content.innerHTML = "There is " + nfl_data.gms.length + " games this week!"
         }).catch(function (error) {
           console.error("Could not parse NFL Data!")
         });;
@@ -27,8 +26,6 @@ class NflCard extends HTMLElement {
         console.error("Could not load NFL Data!")
       });
       // JSON result in `data` variable
-    
-
   }
   setConfig(e) {
     this.config = {}
