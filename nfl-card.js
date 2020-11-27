@@ -7,7 +7,7 @@ class NflCard extends HTMLElement {
 .nfl-card-teams{flex: 1 1;}
 .nfl-card-team{display: flex;flex-flow: row;}
 .nfl-card-team-image{background-size:contain;height:35px;width:35px;}
-.nfl-card-team-name{flex: 1 1;vertical-align:middle;line-height:35px;padding-left:5px;}
+.nfl-card-team-name{flex: 1 1;vertical-align:middle;line-height:35px;padding-left:5px;white-space:nowrap;overflow:hidden;}
 .nfl-card-team-score{width:60px;vertical-align:middle;line-height:35px;padding-right:5px;text-align:right;}
 .nfl-card-quarter{width:25px;line-height:70px;vertical-align:middle;padding-right:5px;text-align:right;font-size:12px;}
 </style>
