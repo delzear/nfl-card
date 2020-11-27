@@ -61,7 +61,7 @@ class NflCard extends HTMLElement {
             t = t.replace('{vs}', nfl_data.gms[i].vs);
             t = t.replace('{hs}', nfl_data.gms[i].hs);
             t = t.replace('{q}', nfl_data.gms[i].q);
-            t = t.replace('{date}', this.getDayOfWeek(nfl_data.gms[i].eid));
+            t = t.replace('{date}', this.getDayOfWeek(nfl_data.gms[i].d));
             t = t.replace('{time}', nfl_data.gms[i].t + 'PM EST');
             c += t;
           }
