@@ -3,9 +3,9 @@ class NflCard extends HTMLElement {
 <style>
 .nfl-card-content{font-family:Roboto, Noto, sans-serif;font-size:14px;display: flex;flex-flow: row wrap; width:100%;}
 .nfl-card-match-container{flex: auto auto; margin:0 4px 4px 0;background: var( --ha-card-background, var(--card-background-color, white) );border-radius: var(--ha-card-border-radius, 4px);box-shadow: var( --ha-card-box-shadow, 0px 2px 1px -1px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 1px 3px 0px rgba(0, 0, 0, 0.12) );}
-.nfl-card-match{display: flex;flex-flow: row wrap;height:70px;min-width:146px;margin:1px;padding:5px;}
+.nfl-card-match{display: flex;flex-flow: row wrap;height:70px;min-width:170px;margin:1px;padding:5px;}
 .nfl-card-teams{flex: 1 1;}
-.nfl-card-team{display: flex;flex-flow: row;}
+.nfl-card-team{display: flex;flex-flow: row;white-space: nowrap;}
 .nfl-card-team-image{background-size:contain;height:35px;width:35px;}
 .nfl-card-team-name{flex: 2 1;vertical-align:middle;line-height:35px;padding-left:5px;}
 .nfl-card-team-score{flex: 1 1;vertical-align:middle;line-height:35px;padding-right:5px;text-align:right;}
