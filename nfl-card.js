@@ -2,10 +2,10 @@ class NflCard extends HTMLElement {
   card_template = `
 <style>
 .nfl-card-content{font-family:Roboto, Noto, sans-serif;font-size:14px;display: grid;grid-template-columns: repeat(auto-fill, minmax(200px, auto)); width:100%;}
-.nfl-card-match-container{margin:0 4px 4px 0;background: var( --ha-card-background, var(--card-background-color, white) );border-radius: var(--ha-card-border-radius, 4px);box-shadow: var( --ha-card-box-shadow, 0px 2px 1px -1px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 1px 3px 0px rgba(0, 0, 0, 0.12) );}
-.nfl-card-match{display: flex;flex-flow: row wrap;height:70px;min-width:190px;margin:1px;padding:5px;}
+.nfl-card-match-container{margin:0 4px 4px;padding:5px; 0;background: var( --ha-card-background, var(--card-background-color, white) );border-radius: var(--ha-card-border-radius, 4px);box-shadow: var( --ha-card-box-shadow, 0px 2px 1px -1px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 1px 3px 0px rgba(0, 0, 0, 0.12) );}
+.nfl-card-match{display: flex;flex-flow: row wrap;height:70px;min-width:190px;margin:1px;}
 .nfl-card-teams{flex: 1 1;}
-.nfl-card-team{display: flex;flex-flow: row;white-space: nowrap;}
+.nfl-card-team{display: flex;flex-flow: row;}
 .nfl-card-team-image{background-size:contain;height:35px;width:35px;}
 .nfl-card-team-name{flex: 2 1;vertical-align:middle;line-height:35px;padding-left:5px;}
 .nfl-card-team-score{flex: 1 1;vertical-align:middle;line-height:35px;padding-right:5px;text-align:right;}
@@ -16,6 +16,7 @@ class NflCard extends HTMLElement {
 
   match_template = `
 	<div class="nfl-card-match-container">
+		<div>{date} at {time}</div>
 		<div class="nfl-card-match">
 			<div class="nfl-card-teams">
 				<div class="nfl-card-team">
@@ -60,6 +61,8 @@ class NflCard extends HTMLElement {
             t = t.replace('{vs}', nfl_data.gms[i].vs);
             t = t.replace('{hs}', nfl_data.gms[i].hs);
             t = t.replace('{q}', nfl_data.gms[i].q);
+            t = t.replace('{date}', this.getDayOfWeek(nfl_data.gms[i].eid));
+            t = t.replace('{time}', nfl_data.gms[i].t + 'PM EST');
             c += t;
           }
           this.content.innerHTML = this.card_template.replace('{nfl-card}', c);
@@ -73,6 +76,32 @@ class NflCard extends HTMLElement {
   }
   setConfig(e) {
     this.config = {}
+  }
+
+  getDayOfWeek(abbv) {
+    switch (abbv) {
+      case 'Mon':
+        return "Mon";
+        break;
+      case 'Tue':
+        return "Tuesday";
+        break;
+      case 'Wed':
+        return "Wednesday";
+        break;
+      case 'Thu':
+        return "Thursday";
+        break;
+      case 'Fri':
+        return "Friday";
+        break;
+      case 'Sat':
+        return "Saturday";
+        break;
+      case 'Sun':
+        return "Sunday";
+        break;
+    }
   }
     
   // The height of your card. Home Assistant uses this to automatically
