@@ -81,7 +81,7 @@ class NflCard extends HTMLElement {
   getDayOfWeek(abbv) {
     switch (abbv) {
       case 'Mon':
-        return "Mon";
+        return "Monday";
         break;
       case 'Tue':
         return "Tuesday";
