@@ -74,8 +74,11 @@ class NflCard extends HTMLElement {
       });
       // JSON result in `data` variable
   }
-  setConfig(e) {
+  setConfig(config) {
     this.config = {}
+    if (config.only_today) {
+
+    }
   }
 
   getDayOfWeek(abbv) {
