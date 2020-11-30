@@ -104,7 +104,7 @@ class NflCard extends HTMLElement {
   getTodayDigits() {
     let today = new Date();
 
-    return parseInt('' + today.getFullYear() + today.getMonth() + today.getDate() + '00');
+    return parseInt('' + today.getFullYear() + (today.getMonth() + 1) + today.getDate() + '00');
   }
 
   getDayOfWeek(abbv) {
