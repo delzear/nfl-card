@@ -62,7 +62,7 @@ class NflCard extends HTMLElement {
           this.card.header = 'NFL Games of Week ' + nfl_data.w;
           let c = '';
           for (let i = 0; i < nfl_data.gms.length; i++) {
-            if ((this.config.only_today && nfl_data.gms[i].eid >= i_today && nfl_data.gms[i].eid <= (i_today + 99) ) || !this.config.only_today ) {
+            if (this.getShowMatch(nfl_data.gms[i])) {
               let t = this.match_template.replace('{vnn}', nfl_data.gms[i].vnn);
               t = t.replace('{hnn}', nfl_data.gms[i].hnn);
               t = t.replace('{v}', nfl_data.gms[i].v);
