@@ -72,7 +72,7 @@ class NflCard extends HTMLElement {
               t = t.replace('{q}', nfl_data.gms[i].q);
               t = t.replace('{date}', this.getDayOfWeek(nfl_data.gms[i].d));
               t = t.replace('{time}', nfl_data.gms[i].t + 'PM EST');
-              if (config.my_team == nfl_data.gms[i].v) {
+              if (this.config.my_team == nfl_data.gms[i].v) {
                 t = t.replace('{myteamh}', " nfl-card-bold");
                 t = t.replace('{myteamh}', " nfl-card-bold");
               }
@@ -117,6 +117,12 @@ class NflCard extends HTMLElement {
     }
     if (config.my_team) {
       this.config.my_team = config.my_team;
+    }
+    if (config.only_my_team) {
+      this.config.only_my_team = config.only_my_team;
+    }
+    else {
+      this.config.only_my_team = false;
     }
 
   }
