@@ -73,12 +73,16 @@ class NflCard extends HTMLElement {
               t = t.replace('{date}', this.getDayOfWeek(nfl_data.gms[i].d));
               t = t.replace('{time}', nfl_data.gms[i].t + 'PM EST');
               if (this.config.my_team == nfl_data.gms[i].v) {
-                t = t.replace('{myteamh}', " nfl-card-bold");
-                t = t.replace('{myteamh}', " nfl-card-bold");
+                t = t.replace('{myteamv}', " nfl-card-bold");
+                t = t.replace('{myteamv}', " nfl-card-bold");
+                t = t.replace('{myteamh}', "");
+                t = t.replace('{myteamh}', "");
               }
               else if (this.config.my_team == nfl_data.gms[i].h) {
-                t = t.replace('{myteamv}', " nfl-card-bold");
-                t = t.replace('{myteamv}', " nfl-card-bold");
+                t = t.replace('{myteamv}', "");
+                t = t.replace('{myteamv}', "");
+                t = t.replace('{myteamh}', " nfl-card-bold");
+                t = t.replace('{myteamh}', " nfl-card-bold");
               }
               else {
                 t = t.replace('{myteamh}', "");
