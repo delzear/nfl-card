@@ -133,9 +133,17 @@ class NflCard extends HTMLElement {
       i_today = parseInt('' + today.getFullYear() + (today.getMonth() + 1) + today.getDate() + '00');
     }
     let show_today = (this.config.only_today && match.eid >= i_today && match.eid <= (i_today + 99)) || !this.config.only_today;
-    let show_my_team = this.config.only_my_team && (match.v == this.config.my_team || match.h == this.config.my_team);
+    let has_my_team
+    if (this.config.my_team) {
+      has_my_team = (match.v == this.config.my_team || match.h == this.config.my_team)
+    }
+    else {
+      has_my_team = false;
+    }
 
-    return show_today && show_my_team;
+    let show_my_team = this.config.only_my_team && has_my_team;
+
+    return (show_today && has_my_team) && show_my_team;
   }
 
   getDayOfWeek(abbv) {
