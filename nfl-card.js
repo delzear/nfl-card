@@ -51,19 +51,28 @@ class NflCard extends HTMLElement {
     fetch('https://static.nfl.com/liveupdate/scorestrip/ss.json')
       .then((response) => {
         response.json().then((nfl_data) => {
+          let str_today = '20201130';
           this.card.header = 'NFL Games of Week ' + nfl_data.w;
           let c = '';
-          for (let i = 0; i < nfl_data.gms.length;i++) {
-            let t = this.match_template.replace('{vnn}', nfl_data.gms[i].vnn);
-            t = t.replace('{hnn}', nfl_data.gms[i].hnn);
-            t = t.replace('{v}', nfl_data.gms[i].v);
-            t = t.replace('{h}', nfl_data.gms[i].h);
-            t = t.replace('{vs}', nfl_data.gms[i].vs);
-            t = t.replace('{hs}', nfl_data.gms[i].hs);
-            t = t.replace('{q}', nfl_data.gms[i].q);
-            t = t.replace('{date}', this.getDayOfWeek(nfl_data.gms[i].d));
-            t = t.replace('{time}', nfl_data.gms[i].t + 'PM EST');
-            c += t;
+          for (let i = 0; i < nfl_data.gms.length; i++) {
+            if ((this.config.only_today && nfl_data.gms[i].eid.startsWith(str_today)) || !this.config.only_today) {
+              let t = this.match_template.replace('{vnn}', nfl_data.gms[i].vnn);
+              t = t.replace('{hnn}', nfl_data.gms[i].hnn);
+              t = t.replace('{v}', nfl_data.gms[i].v);
+              t = t.replace('{h}', nfl_data.gms[i].h);
+              t = t.replace('{vs}', nfl_data.gms[i].vs);
+              t = t.replace('{hs}', nfl_data.gms[i].hs);
+              t = t.replace('{q}', nfl_data.gms[i].q);
+              t = t.replace('{date}', this.getDayOfWeek(nfl_data.gms[i].d));
+              t = t.replace('{time}', nfl_data.gms[i].t + 'PM EST');
+              c += t;
+            }
+          }
+          if (c == '' && this.config.only_today) {
+            c = 'No games today';
+          }
+          else if (c == '' && !this.config.only_today) {
+            c = 'No games this week';
           }
           this.content.innerHTML = this.card_template.replace('{nfl-card}', c);
         }).catch((error) => {
@@ -77,7 +86,10 @@ class NflCard extends HTMLElement {
   setConfig(config) {
     this.config = {}
     if (config.only_today) {
-
+      this.config.only_today = true;
+    }
+    else {
+      this.config.only_today = false;
     }
   }
 
