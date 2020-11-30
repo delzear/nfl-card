@@ -10,6 +10,7 @@ class NflCard extends HTMLElement {
 .nfl-card-team-name{flex: 1 auto;vertical-align:middle;line-height:35px;padding-left:5px;white-space:nowrap;overflow:hidden;}
 .nfl-card-team-score{width:40px;vertical-align:middle;line-height:35px;padding-right:5px;text-align:right;}
 .nfl-card-quarter{width:25px;line-height:70px;vertical-align:middle;padding-right:5px;text-align:right;font-size:12px;}
+.nfl-card-bold{font-weight:bold;}
 </style>
 <div class="nfl-card-content">{nfl-card}</div>
   `;
@@ -21,13 +22,13 @@ class NflCard extends HTMLElement {
 			<div class="nfl-card-teams">
 				<div class="nfl-card-team">
 					<div class="nfl-card-team-image" style="background-image:url(https://static.www.nfl.com/f_auto,q_auto/league/api/clubs/logos/{v});"></div>
-					<div class="nfl-card-team-name">{vnn}</div>
-					<div class="nfl-card-team-score">{vs}</div>
+					<div class="nfl-card-team-name{myteamv}">{vnn}</div>
+					<div class="nfl-card-team-score{myteamv}">{vs}</div>
 				</div>
 				<div class="nfl-card-team">
 					<div class="nfl-card-team-image" style="background-image:url(https://static.www.nfl.com/f_auto,q_auto/league/api/clubs/logos/{h});"></div>
-					<div class="nfl-card-team-name">{hnn}</div>
-					<div class="nfl-card-team-score">{hs}</div>
+					<div class="nfl-card-team-name{myteamh}">{hnn}</div>
+					<div class="nfl-card-team-score{myteamh}">{hs}</div>
 				</div>
 			</div>
 			<div class="nfl-card-quarter">{q}</div>
@@ -71,6 +72,20 @@ class NflCard extends HTMLElement {
               t = t.replace('{q}', nfl_data.gms[i].q);
               t = t.replace('{date}', this.getDayOfWeek(nfl_data.gms[i].d));
               t = t.replace('{time}', nfl_data.gms[i].t + 'PM EST');
+              if (config.my_team == nfl_data.gms[i].v) {
+                t = t.replace('{myteamh}', " nfl-card-bold");
+                t = t.replace('{myteamh}', " nfl-card-bold");
+              }
+              else if (config.my_team == nfl_data.gms[i].h) {
+                t = t.replace('{myteamv}', " nfl-card-bold");
+                t = t.replace('{myteamv}', " nfl-card-bold");
+              }
+              else {
+                t = t.replace('{myteamh}', "");
+                t = t.replace('{myteamh}', "");
+                t = t.replace('{myteamv}', "");
+                t = t.replace('{myteamv}', "");
+              }
               c += t;
             }
           }
@@ -100,6 +115,10 @@ class NflCard extends HTMLElement {
     if (config.only_today_debug) {
       this.config.only_today_debug = config.only_today_debug;
     }
+    if (config.my_team) {
+      this.config.my_team = config.my_team;
+    }
+
   }
   getTodayDigits() {
     let today = new Date();
