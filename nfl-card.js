@@ -76,7 +76,7 @@ class NflCard extends HTMLElement {
                 t = t.replace('{myteamh}', " nfl-card-bold");
                 t = t.replace('{myteamh}', " nfl-card-bold");
               }
-              else if (config.my_team == nfl_data.gms[i].h) {
+              else if (this.config.my_team == nfl_data.gms[i].h) {
                 t = t.replace('{myteamv}', " nfl-card-bold");
                 t = t.replace('{myteamv}', " nfl-card-bold");
               }
