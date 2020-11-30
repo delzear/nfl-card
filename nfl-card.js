@@ -62,7 +62,7 @@ class NflCard extends HTMLElement {
           this.card.header = 'NFL Games of Week ' + nfl_data.w;
           let c = '';
           for (let i = 0; i < nfl_data.gms.length; i++) {
-            if ((this.config.only_today && nfl_data.gms[i].eid >= i_today && nfl_data.gms[i].eid <= (i_today + 99)) || !this.config.only_today) {
+            if ((this.config.only_today && nfl_data.gms[i].eid >= i_today && nfl_data.gms[i].eid <= (i_today + 99) ) || !this.config.only_today ) {
               let t = this.match_template.replace('{vnn}', nfl_data.gms[i].vnn);
               t = t.replace('{hnn}', nfl_data.gms[i].hnn);
               t = t.replace('{v}', nfl_data.gms[i].v);
@@ -130,6 +130,14 @@ class NflCard extends HTMLElement {
     }
 
   }
+
+  getShowMatch(match) {
+    let show_today = (this.config.only_today && match.eid >= i_today && match.eid <= (i_today + 99)) || !this.config.only_today;
+    let show_my_team = this.config.only_my_team && (match.v == this.config.my_team || match.h == this.config.my_team);
+
+    return show_today || show_my_team;
+  }
+
   getTodayDigits() {
     let today = new Date();
 
