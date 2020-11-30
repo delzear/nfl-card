@@ -52,13 +52,6 @@ class NflCard extends HTMLElement {
     fetch('https://static.nfl.com/liveupdate/scorestrip/ss.json')
       .then((response) => {
         response.json().then((nfl_data) => {
-          let i_today;
-          if (this.config.only_today_debug) {
-            i_today = this.config.only_today_debug
-          }
-          else {
-            i_today = this.getTodayDigits();
-          }
           this.card.header = 'NFL Games of Week ' + nfl_data.w;
           let c = '';
           for (let i = 0; i < nfl_data.gms.length; i++) {
@@ -132,6 +125,13 @@ class NflCard extends HTMLElement {
   }
 
   getShowMatch(match) {
+    let i_today;
+    if (this.config.only_today_debug) {
+      i_today = this.config.only_today_debug
+    }
+    else {
+      i_today = this.getTodayDigits();
+    }
     let show_today = (this.config.only_today && match.eid >= i_today && match.eid <= (i_today + 99)) || !this.config.only_today;
     let show_my_team = this.config.only_my_team && (match.v == this.config.my_team || match.h == this.config.my_team);
 
