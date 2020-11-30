@@ -130,18 +130,12 @@ class NflCard extends HTMLElement {
       i_today = this.config.only_today_debug
     }
     else {
-      i_today = this.getTodayDigits();
+      i_today = parseInt('' + today.getFullYear() + (today.getMonth() + 1) + today.getDate() + '00');
     }
     let show_today = (this.config.only_today && match.eid >= i_today && match.eid <= (i_today + 99)) || !this.config.only_today;
     let show_my_team = this.config.only_my_team && (match.v == this.config.my_team || match.h == this.config.my_team);
 
-    return show_today || show_my_team;
-  }
-
-  getTodayDigits() {
-    let today = new Date();
-
-    return parseInt('' + today.getFullYear() + (today.getMonth() + 1) + today.getDate() + '00');
+    return show_today && show_my_team;
   }
 
   getDayOfWeek(abbv) {
