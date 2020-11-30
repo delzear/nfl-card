@@ -56,7 +56,7 @@ class NflCard extends HTMLElement {
             i_today = this.config.only_today_debug
           }
           else {
-            i_today = getTodayDigits();
+            i_today = this.getTodayDigits();
           }
           this.card.header = 'NFL Games of Week ' + nfl_data.w;
           let c = '';
