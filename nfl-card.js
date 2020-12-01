@@ -133,6 +133,7 @@ class NflCard extends HTMLElement {
       i_today = this.config.only_today_debug
     }
     else {
+      let today = new Date();
       i_today = parseInt('' + today.getFullYear() + (today.getMonth() + 1) + today.getDate() + '00');
     }
 
