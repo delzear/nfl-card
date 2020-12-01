@@ -99,7 +99,6 @@ class NflCard extends HTMLElement {
       }).catch((error) => {
         console.error("Could not load NFL Data!")
       });
-      // JSON result in `data` variable
   }
   setConfig(config) {
     this.config = {}
@@ -112,8 +111,12 @@ class NflCard extends HTMLElement {
     if (config.only_today_debug) {
       this.config.only_today_debug = config.only_today_debug;
     }
+
     if (config.my_team) {
       this.config.my_team = config.my_team;
+    }
+    else {
+      this.config.my_team = '';
     }
     if (config.only_my_team) {
       this.config.only_my_team = config.only_my_team;
@@ -132,18 +135,23 @@ class NflCard extends HTMLElement {
     else {
       i_today = parseInt('' + today.getFullYear() + (today.getMonth() + 1) + today.getDate() + '00');
     }
-    let show_today = (this.config.only_today && match.eid >= i_today && match.eid <= (i_today + 99)) || !this.config.only_today;
-    let has_my_team
-    if (this.config.my_team) {
-      has_my_team = (match.v == this.config.my_team || match.h == this.config.my_team)
-    }
-    else {
-      has_my_team = false;
-    }
 
-    let show_my_team = this.config.only_my_team && has_my_team;
+    let is_today = (match.eid >= i_today && match.eid <= (i_today + 99));
 
-    return (show_today && has_my_team) && show_my_team;
+    let has_my_team = (match.v == this.config.my_team || match.h == this.config.my_team)
+
+    if (this.config.only_today && this.config.only_my_team) {
+      return (is_today && has_my_team);
+    }
+    else if (this.config.only_today && !this.config.only_my_team) {
+      return is_today;
+    }
+    else if (!this.config.only_today && this.config.only_my_team) {
+      return only_my_team;
+    }
+    else { // (!this.config.only_today && !this.config.only_my_team)
+      return true;
+    }
   }
 
   getDayOfWeek(abbv) {
