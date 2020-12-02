@@ -134,7 +134,8 @@ class NflCard extends HTMLElement {
     }
     else {
       let today = new Date();
-      i_today = parseInt('' + today.getFullYear() + (today.getMonth() + 1) + today.getDate() + '00');
+
+      i_today = parseInt('' + today.getFullYear() + ('0' + (today.getMonth() + 1)).slice(-2) + ('0' + today.getDate()).slice(-2) + '00');
     }
 
     let is_today = (match.eid >= i_today && match.eid <= (i_today + 99));
