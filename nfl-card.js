@@ -94,10 +94,12 @@ class NflCard extends HTMLElement {
           }
           this.content.innerHTML = this.card_template.replace('{nfl-card}', c);
         }).catch((error) => {
-          console.error("Could not parse NFL Data!")
+          this.content.innerHTML = this.card_template.replace('{nfl-card}', 'No games this week');
+          console.error("Could not parse JSON NFL Data!");
         });;
       }).catch((error) => {
         console.error("Could not load NFL Data!")
+        this.content.innerHTML = this.card_template.replace('{nfl-card}', 'No games this week');
       });
   }
   setConfig(config) {
